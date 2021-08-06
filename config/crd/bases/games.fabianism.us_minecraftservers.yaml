@@ -30,9 +30,246 @@ spec:
           metadata:
             type: object
           spec:
-            description: Spec defines the desired state of MinecraftServer
             type: object
-            x-kubernetes-preserve-unknown-fields: true
+            properties:
+              image:
+                type: string
+                default: itzg/minecraft-server
+              imageTag:
+                type: string
+                default: latest
+              imagePullSecret: ""
+              strategyType:
+                type: string
+                default: Recreate
+              nodeSelector:
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+              tolerations:
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+              affinity:
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+              securityContext:
+                type: object
+                properties:
+                  runAsUser:
+                    type: integer
+                    default: 1000
+                  fsGroup:
+                    type: integer
+                    default: 2000
+              livenessProbe:
+                type: object
+                properties:
+                  initialDelaySeconds:
+                    type: integer
+                    default: 30
+                  periodSeconds:
+                    type: integer
+                    default: 5
+                  failureThreshold:
+                    type: integer
+                    default: 10
+                  successThreshold:
+                    type: integer
+                    default: 1
+                  timeoutSeconds:
+                    type: integer
+                    default: 1
+              readinessProbe:
+                type: object
+                properties:
+                  initialDelaySeconds:
+                    type: integer
+                    default: 30
+                  periodSeconds:
+                    type: integer
+                    default: 5
+                  failureThreshold:
+                    type: integer
+                    default: 10
+                  successThreshold:
+                    type: integer
+                    default: 1
+                  timeoutSeconds:
+                    type: integer
+                    default: 1
+              startupProbe:
+                type: object
+                properties:
+                  enabled:
+                    type: boolean
+                    default: false
+                  failureThreshold:
+                    type: integer
+                    default: 30
+                  periodSeconds:
+                    type: integer
+                    default: 10
+              initContainers:
+                type: array
+                items:
+                  type: object
+                  x-kubernetes-preserve-unknown-fields: true
+              extraVolumes:
+                type: array
+                items:
+                  type: object
+                  x-kubernetes-preserve-unknown-fields: true
+              minecraftServer:
+                type: object
+                required:
+                  - eula
+                properties:
+                  eula:
+                    type: string
+                    enum:
+                      - "TRUE"
+                      - "FALSE"
+                    default: "FALSE"
+                  version:
+                    type: string
+                    enum:
+                      - "VANILLA"
+                      - "FORGE"
+                      - "SPIGOT"
+                      - "BUKKIT"
+                      - "PAPER"
+                      - "FTBA"
+                      - "SPONGEVANILLA"
+                      - "CURSEFORGE"
+                      - "LATEST"
+                    default: "LATEST"
+                  forgeVersion:
+                    type: string
+                  spongeVersion:
+                    type: string
+                  forgeInstallerUrl:
+                    type: string
+                  bukkitDownloadUrl:
+                    type: string
+                  spigotDownloadUrl:
+                    type: string
+                  paperDownloadUrl:
+                    type: string
+                  ftbServerMod:
+                    type: string
+                  cfServerMod:
+                    type: string
+                  ftbLegacyJavaFixer:
+                    type: boolean
+                    default: false
+                  difficulty:
+                    type: string
+                    enum:
+                      - "easy"
+                      - "normal"
+                      - "hard"
+                    default: "easy"
+                  whitelist:
+                    type: string
+                  ops:
+                    type: string
+                  icon:
+                    type: string
+                  maxPlayers:
+                    type: integer
+                    default: 20
+                  maxWorldSize:
+                    type: integer
+                    default: 10000
+                  allowNether:
+                    type: boolean
+                    default: true
+                  announcePlayerAchievements:
+                    type: boolean
+                    default: true
+                  enableCommandBlock:
+                    type: boolean
+                    default: true
+                  forceGameMode:
+                    type: boolean
+                    default: false
+                  generateStructurs:
+                    type: boolean
+                    default: true
+                  hardcore:
+                    type: boolean
+                    default: false
+                  maxBuildHeight:
+                    type: integer
+                    default: 256
+                  maxTickTime:
+                    type: integer
+                    default: 60000
+                  spawnAnimals:
+                    type: boolean
+                    default: true
+                  spawnMonsters:
+                    type: boolean
+                    default: true
+                  spawnNPCs:
+                    type: boolean
+                    default: true
+                  viewDistance:
+                    type: integer
+                    default: 10
+                  levelSeed:
+                    type: string
+                  gameMode:
+                    type: string
+                    enum:
+                      - creative
+                      - survival
+                      - adventure
+                      - spectator
+                    default: survival
+                  motd:
+                    type: string
+                    default: "Welcome to Minecraft on Kubernetes!"
+                  pvp:
+                    type: boolean
+                    default: false
+                  levelType:
+                    type: string
+                    enum:
+                      - DEFAULT
+                      - FLAT
+                      - LARGEBIOMES
+                      - AMPLIFIED
+                      - CUSTOMIZED
+                    default: DEFAULT
+                  generatorSettings:
+                    type: object
+                    x-kubernetes-preserve-unknown-fields: true
+                  worldSaveName:
+                    type: string
+                    default: world
+                  downloadWorldUrl:
+                    type: string
+                  forceReDownload:
+                    type: boolean
+                    default: false
+                  downloadModpackUrl:
+                    type: string
+                  removeOldMods:
+                    type: boolean
+                    default: false
+              resources:
+                type: object
+                properties:
+                  limits:
+                    description: "Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/"
+                    type: object
+                    additionalProperties:
+                      type: string
+                  requests:
+                    description: "Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/"
+                    type: object
+                    additionalProperties:
+                      type: string
           status:
             description: Status defines the observed state of MinecraftServer
             type: object
