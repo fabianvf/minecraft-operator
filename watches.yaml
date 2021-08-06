@@ -1,0 +1,6 @@
+# Use the 'create api' subcommand to add watches to this file.
+- group: games.fabianism.us
+  version: v1alpha2
+  kind: MinecraftServer
+  chart: helm-charts/minecraft
+#+kubebuilder:scaffold:watch

@@ -1,0 +1,115 @@
+apiVersion: games.fabianism.us/v1alpha2
+kind: MinecraftServer
+metadata:
+  name: minecraftserver-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/minecraft/values.yaml
+  affinity: {}
+  deploymentAnnotations: {}
+  extraEnv: {}
+  extraVolumes: []
+  image: itzg/minecraft-server
+  imagePullSecret: ""
+  imageTag: latest
+  initContainers: []
+  livenessProbe:
+    failureThreshold: 10
+    initialDelaySeconds: 30
+    periodSeconds: 5
+    successThreshold: 1
+    timeoutSeconds: 1
+  minecraftServer:
+    allowNether: true
+    announcePlayerAchievements: true
+    bukkitDownloadUrl: null
+    cfServerMod: null
+    difficulty: easy
+    downloadModpackUrl: null
+    downloadWorldUrl: null
+    enableCommandBlock: true
+    eula: "FALSE"
+    externalIPs: null
+    extraPorts: []
+    forceReDownload: false
+    forcegameMode: false
+    forgeInstallerUrl: null
+    forgeVersion: null
+    ftbLegacyJavaFixer: false
+    ftbServerMod: null
+    gameMode: survival
+    generateStructures: true
+    generatorSettings: null
+    hardcore: false
+    icon: null
+    jvmOpts: ""
+    jvmXXOpts: ""
+    levelSeed: null
+    levelType: DEFAULT
+    loadBalancerIP: null
+    maxBuildHeight: 256
+    maxPlayers: 20
+    maxTickTime: 60000
+    maxWorldSize: 10000
+    memory: 1024M
+    motd: Welcome to Minecraft on Kubernetes!
+    nodePort: null
+    onlineMode: true
+    ops: null
+    paperDownloadUrl: null
+    pvp: false
+    query:
+      enabled: false
+      port: 25565
+    rcon:
+      enabled: false
+      existingSecret: null
+      loadBalancerIP: null
+      nodePort: null
+      password: CHANGEME!
+      port: 25575
+      secretKey: rcon-password
+      serviceType: ClusterIP
+    removeOldMods: false
+    serviceAnnotations: {}
+    servicePort: 25565
+    serviceType: ClusterIP
+    spawnAnimals: true
+    spawnMonsters: true
+    spawnNPCs: true
+    spigotDownloadUrl: null
+    spongeVersion: null
+    type: VANILLA
+    version: LATEST
+    viewDistance: 10
+    whitelist: null
+    worldSaveName: world
+  nodeSelector: {}
+  persistence:
+    annotations: {}
+    dataDir:
+      Size: 1Gi
+      enabled: false
+  podAnnotations: {}
+  rconServiceAnnotations: {}
+  readinessProbe:
+    failureThreshold: 10
+    initialDelaySeconds: 30
+    periodSeconds: 5
+    successThreshold: 1
+    timeoutSeconds: 1
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  securityContext:
+    fsGroup: 2000
+    runAsUser: 1000
+  serviceAnnotations: {}
+  startupProbe:
+    enabled: false
+    failureThreshold: 30
+    periodSeconds: 10
+  strategyType: Recreate
+  tolerations: []
+  
+  

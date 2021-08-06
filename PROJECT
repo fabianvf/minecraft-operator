@@ -1,0 +1,17 @@
+domain: fabianism.us
+layout:
+- hybrid.helm.sdk.operatorframework.io/v1-alpha
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+projectName: minecraft-operator
+repo: github.com/fabianvf/minecraft-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: fabianism.us
+  group: games
+  kind: MinecraftServer
+  version: v1alpha2
+version: "3"
